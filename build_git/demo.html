@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Label Studio 1.8.0 Editable + Export</title>
+
+  <!-- 使用 1.8.0 CDN -->
+  <link rel="stylesheet" href="main.css" />
+  <script src="main.js"></script>
+
+  <style>
+      body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+      #ls-container { width: 100vw; height: 90vh; border-bottom: 1px solid #ccc; }
+      #export-btn { padding: 10px 20px; margin: 10px; font-size: 16px; }
+  </style>
+</head>
+<body>
+
+<div id="ls-container"></div>
+<button id="export-btn">导出标注结果</button>
+
+<script>
+  const imageUrl = "test.jpg"; // 替换为你的图片路径
+
+  // 预加载标注
+  const preannotations = [
+    {
+      "from_name": "label",
+      "score": 0.975402295589447,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 45.82102942088294,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 4.181692819333804,
+        "width": 9.166153650435191,
+        "x": 11.930301785469055,
+        "y": 40.086930990219116
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9514443278312683,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 22.197065403852516,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 0.9866291499013928,
+        "width": 10.199281904432508,
+        "x": 41.68815314769745,
+        "y": 64.62323069572449
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9493613243103027,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 21.138420306816304,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 1.1669916074363924,
+        "width": 9.457389892093719,
+        "x": 39.12491798400879,
+        "y": 42.8945392370224
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9492204189300537,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 22.519130807705025,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 2.056256624162665,
+        "width": 9.980992665366522,
+        "x": 31.267178058624268,
+        "y": 64.38707113265991
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9479709267616272,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 22.642054885783523,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 0.9492606513437242,
+        "width": 10.037986815921844,
+        "x": 52.64497399330139,
+        "y": 64.71906900405884
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9443310499191284,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 22.734425055286874,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 3.3020299813635114,
+        "width": 9.879628438798207,
+        "x": 20.834270119667053,
+        "y": 64.18091058731079
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9254963994026184,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 12.58475692183883,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 87.44553224546091,
+        "width": 28.246658567398313,
+        "x": 77.2314727306366,
+        "y": 48.92219603061676
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9242110252380371,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 9.267502234726356,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 61.51250608021641,
+        "width": 21.503233531164746,
+        "x": 54.494768381118774,
+        "y": 35.90328395366669
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9217048287391663,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 28.80018526914889,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 36.23169809391102,
+        "width": 7.350786905440073,
+        "x": 33.83222222328186,
+        "y": 35.28371751308441
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9165462255477905,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 13.241057421164538,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 86.21189762851905,
+        "width": 28.746190146794394,
+        "x": 86.69717311859131,
+        "y": 49.43417012691498
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9123409986495972,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 46.28896965551629,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 6.0820111021032,
+        "width": 10.135116274394687,
+        "x": 1.8915064632892609,
+        "y": 39.32520151138306
+      }
+    },
+    {
+      "from_name": "label",
+      "score": 0.9058946371078491,
+      "to_name": "image",
+      "type": "rectanglelabels",
+      "value": {
+        "height": 12.975333481238632,
+        "rectanglelabels": [
+          "bar"
+        ],
+        "rotation": 84.92524708323957,
+        "width": 28.844191536070806,
+        "x": 95.86777091026306,
+        "y": 49.3769496679306
+      }
+    }
+  ];
+
+  // 初始化 Label Studio
+  const labelStudio = new LabelStudio('ls-container', {
+    config: `
+        <View>
+          <Image name="image" value="$image"/>
+          <RectangleLabels name="label" toName="image">
+            <Label value="bar" background="green"/>
+            <Label value="box" background="red"/>
+          </RectangleLabels>
+        </View>
+      `,
+    task: {
+      id: 1,
+      data: { image: imageUrl },
+      annotations: [
+        { id: 100, lead_time: 1, result: preannotations }
+      ]
+    },
+    interfaces: ["panel", "annotations", "predictions"],
+    isReadOnly: false
+  });
+
+  document.getElementById('export-btn').addEventListener('click', () => {
+    const annotations = labelStudio.store.annotationStore.annotations
+    // ✅ 1.8.0 正确导出方式
+    const results = annotations.map(a => a.serializeAnnotation());
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(results, null, 2));
+
+    const dlAnchor = document.createElement('a');
+    dlAnchor.setAttribute("href", dataStr);
+    dlAnchor.setAttribute("download", "annotations.json");
+    dlAnchor.click();
+  });
+</script>
+
+</body>
+</html>
